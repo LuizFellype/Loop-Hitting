@@ -23,20 +23,33 @@ const eat = (howAte) => {
 
 const check = (objConst) => objConst
 
+
 // ------   Tests ------ //
 
+
 test(" -10 pounds in opponents health.  get 90 from 100  ", () => {
-  expect(atack(player, opponent)).toEqual({
-    health: 90,
-    power: 20
+    let changedOpponent = atack(player, opponent)
+    expect(changedOpponent).toEqual({
+      health: 90,
+      power: 20
     })
+    expect(changedOpponent).not.toBe(opponent)
+})
+ 
+test(" -10 pounds in opponents health.  get 90 from 100  ", () => {
+    let changedPlayer = atack(opponent, player)
+    expect(changedPlayer).toEqual({
+      health: 90,
+      power: 20
+    })
+    expect(changedPlayer).not.toBe(player)
 })
 
 test("degree 10 in player health.  get 90 from 100  ", () => {
     expect(atack(opponent, player)).toEqual({
         health: 90,
         power: 20
-        })
+    })
 })
   
 test(` +10 in power, but lose 20 in health = 70 for the 10's 
@@ -44,16 +57,5 @@ test(` +10 in power, but lose 20 in health = 70 for the 10's
     expect(eat(player)).toEqual({
       health: 80,
       power: 30
-      })
-  })
-
-test("see the imutablity of the object", ()=> {
-    expect(player).toEqual({ 
-        health: 100,
-        power: 20 })
-})
-test("see the imutablity of the object", ()=> {
-    expect(opponent).toEqual({ 
-        health: 100,
-        power: 20 })
+    })
 })
