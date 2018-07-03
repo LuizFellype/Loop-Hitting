@@ -1,61 +1,76 @@
-const player = {
-    health: 100,
-    power: 20
-}
-const opponent = {
-    health: 100,
-    power: 20
-}
 
 const atack = (shooter, target) => {
-    const targetInstance = { ...target }
-    targetInstance.health -= 10
-    return targetInstance
+    const newTarget = { ...target }
+    const newShooter = { ...shooter }
+    if (newShooter.skill >= newTarget.dodge){
+        newTarget.life -= newShooter.damage
+    }
+    return newTarget
 }
 
 
-const eat = (howAte) => {
-    const howAteInstance = { ...howAte }
-    howAteInstance.health -= howAteInstance.power
-    howAteInstance.power += 10
-    return howAteInstance
+const eat = (whoAte) => {
+    const newWhoAte = { ...whoAte }
+    newWhoAte.life -= newWhoAte.damage
+    newWhoAte.damage += 10
+    return newWhoAte
 }
-
-const check = (objConst) => objConst
-
 
 // ------   Tests ------ //
 
+const fighter = {
+    life: 10,
+    damage: 2,
+    skill: 5,
+    dodge: 5,
+}
+const opponent = {
+    life: 10,
+    damage: 2,
+    skill: 5,
+    dodge: 5,
+}
 
-test(" -10 pounds in opponents health.  get 90 from 100  ", () => {
-    let changedOpponent = atack(player, opponent)
+test(`tried to attack. 
+    keep the same on and see the imunitily`, () => {
+    const fighterTest = { ...fighter, skill: 4 }
+    let notChangedPlayer = atack(fighterTest, opponent)
+    expect(notChangedPlayer).toEqual({
+        life: 10,
+        damage: 2,
+        skill: 5,
+        dodge: 5,
+    })
+    expect(notChangedPlayer).toEqual(opponent)
+})
+
+test(` -power pounds in opponents health.
+    Get 80 from 100 see the imunitily `, () => {
+    const fighterTest = { ...fighter, skill: 6 }
+    let changedOpponent = atack(fighterTest, opponent)
     expect(changedOpponent).toEqual({
-      health: 90,
-      power: 20
+        life: 8,
+        damage: 2,
+        skill: 5,
+        dodge: 5,
     })
     expect(changedOpponent).not.toBe(opponent)
 })
  
-test(" -10 pounds in opponents health.  get 90 from 100  ", () => {
-    let changedPlayer = atack(opponent, player)
-    expect(changedPlayer).toEqual({
-      health: 90,
-      power: 20
-    })
-    expect(changedPlayer).not.toBe(player)
-})
 
-test("degree 10 in player health.  get 90 from 100  ", () => {
-    expect(atack(opponent, player)).toEqual({
-        health: 90,
-        power: 20
-    })
-})
+
   
 test(` +10 in power, but lose 20 in health = 70 for the 10's 
     lost above`, () => {
-    expect(eat(player)).toEqual({
-      health: 80,
-      power: 30
+    const obj = {
+        life: 100,
+        damage: 20
+    }
+    let changObj = eat(obj) 
+    expect(changObj).toEqual({
+      life: 80,
+      damage: 30,
     })
+    expect(changObj).not.toBe(obj)
 })
+
