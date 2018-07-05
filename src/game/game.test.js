@@ -1,4 +1,4 @@
-import { attack, eat } from './game'
+import { attack, eat, f} from './game'
 
 const fighter = {
     life: 10,
@@ -13,6 +13,11 @@ const opponent = {
     dodge: 5,
 }
 
+
+test('sum 2 + 4 = 6', ()=> {
+    expect(f(2, 4)).toEqual(6)
+})
+
 test(`tried to attack.
     keep the same on and see the imunitily`, () => {
     const fighterTest = { ...fighter, skill: 4 }
@@ -21,10 +26,10 @@ test(`tried to attack.
     expect(notChangedPlayer).toEqual({
         life: 10,
         damage: 2,
-        skill: 5,
+        skill: 6,
         dodge: 5,
     })
-    expect(notChangedPlayer).toBe(opponent)
+    expect(notChangedPlayer).not.toBe(opponent)
 })
 test(` -power pounds in opponents health.
     Get 80 from 100 see the imunitily `, () => {
