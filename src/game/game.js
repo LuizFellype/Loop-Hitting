@@ -14,14 +14,16 @@ export const attack = (shooter, target) => {
 }
 
 export const eat = (whoAte) => {
-    if (whoAte.life == 20) return whoAte
+    if (whoAte.damage >= 20) return whoAte
     const newWhoAte = { ...whoAte,
         life: whoAte.life - whoAte.damage,
         damage: whoAte.damage + 10
     }
     return newWhoAte
 }
-const sum = (x , y) => x + y
-export const f = (x, y) => { 
-    return sum (x, y)
-}
+
+// simple functions to learn about how to do tests
+// const sum = (x , y) => x + y
+// export const f = (x, y) => { 
+//     return sum (x, y)
+// }

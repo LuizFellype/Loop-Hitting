@@ -13,11 +13,6 @@ const opponent = {
     dodge: 5,
 }
 
-
-test('sum 2 + 4 = 6', ()=> {
-    expect(f(2, 4)).toEqual(6)
-})
-
 test(`tried to attack.
     keep the same on and see the imunitily`, () => {
     const fighterTest = { ...fighter, skill: 4 }
@@ -55,7 +50,7 @@ test('not increase in life -> have max life already. 20', () => {
     })
 } )
 
-test(` +10 in power, but lose 20 in health = 70 for the 10's
+test(` +10 in damage, but lose 20 in health = 70 for the 10's
     lost above`, () => {
     const obj = {
         life: 100,
@@ -68,3 +63,10 @@ test(` +10 in power, but lose 20 in health = 70 for the 10's
     })
     expect(changObj).not.toBe(obj)
 })
+
+
+// tests about how to do tests
+// test('sum 2 + 4 = 6', ()=> {
+    // expect(f(2, 4)).toEqual(6)
+// })
+
