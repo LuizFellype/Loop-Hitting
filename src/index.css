@@ -3,5 +3,5 @@ body {
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(rgba(20, 3, 3, 0.349), white)
+  background: linear-gradient(rgba(20, 3, 3, 0.349), rgb(204, 203, 203))
 }

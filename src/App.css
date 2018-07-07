@@ -15,6 +15,16 @@
   padding-top: 30%; 
 }
 
+.title {
+  font-size: 29px;
+  text-align: center;
+  margin-top: -49px;
+  padding-top: 10px;
+  padding-bottom: 10px; 
+  border-radius: 5%;
+  background: radial-gradient(rgb(71, 69, 69), rgba(97, 87, 87, 0.349)) ;
+}
+
 .tree-col {
   margin-top: -70px;
   display: grid;
@@ -26,7 +36,7 @@
   text-align: center;
   margin-top: -100px;
 }
-.display {
+.turn {
   text-align: center;
-  margin-bottom: -20px;
+  margin-top: -70px;
 }

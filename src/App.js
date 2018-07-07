@@ -38,12 +38,15 @@ class App extends Component {
   render() {
     return (
       <div className='all'>
-        <div className='display'> 
-          <h1> Turn: PLAYER 1</h1>
+        <div className='title'> 
+          <p> LOOP HITTING</p>
+        </div>
+        <div className='turn'> 
+          <h2> Turn: PLAYER 1</h2>
         </div>
         <div className='tree-col'>
           <div className=''> 
-            <h1> Player 1</h1>
+            <h2> Player 1</h2>
             <h3>LIFE: <div value={this.state.fighter.life}/></h3>
             <h3>DAMAGE: <div value={this.state.fighter.damage}/></h3>
             <h3>SKILL: <div value={this.state.fighter.skill}/></h3>
@@ -57,7 +60,7 @@ class App extends Component {
             <h1>VS</h1>
           </div>        
           <div class=''>
-            <h1> Player 2</h1>
+            <h2> Player 2</h2>
             <h3>LIFE: <div value={this.state.opponent.life}/></h3>
             <h3>DAMAGE: <div value={this.state.opponent.damage}/></h3>
             <h3>SKILL: <div value={this.state.opponent.skill}/></h3>
