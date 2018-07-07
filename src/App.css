@@ -1,4 +1,32 @@
+*{
+  font-family: monospace;
+}
+.all {
+  display: grid;
+  height: 670px;
+  width: 710px;
+  border: solid 1px;
+  border-radius: 5%;
+  overflow: hidden;
+  
+  align-items: center;
+}
+.middle{
+  padding-top: 30%; 
+}
+
+.tree-col {
+  margin-top: -70px;
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(3, 33%);
+}
+
+.battle-log {
+  text-align: center;
+  margin-top: -100px;
+}
 .display {
-  display: flex; 
-  justify-content: center;
+  text-align: center;
+  margin-bottom: -20px;
 }

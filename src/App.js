@@ -37,13 +37,13 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className='all'>
         <div className='display'> 
-          <h3> TURN: Player 1</h3>
+          <h1> Turn: PLAYER 1</h1>
         </div>
-        <div className='display'>
+        <div className='tree-col'>
           <div className=''> 
-            <h3> Player 1</h3>
+            <h1> Player 1</h1>
             <h3>LIFE: <div value={this.state.fighter.life}/></h3>
             <h3>DAMAGE: <div value={this.state.fighter.damage}/></h3>
             <h3>SKILL: <div value={this.state.fighter.skill}/></h3>
@@ -53,9 +53,11 @@ class App extends Component {
             {/* <button onClick={() => this.eatFighter(this.state.fighter)}>EAT</button> 
             <button onClick={() => this.attackOpponent(this.state.fighter, this.state.opponent)}>ATTACK</button> */}
           </div>
-        
-          <div class='sideL'>
-            <h3> Player 2</h3>
+          <div className='middle'>
+            <h1>VS</h1>
+          </div>        
+          <div class=''>
+            <h1> Player 2</h1>
             <h3>LIFE: <div value={this.state.opponent.life}/></h3>
             <h3>DAMAGE: <div value={this.state.opponent.damage}/></h3>
             <h3>SKILL: <div value={this.state.opponent.skill}/></h3>
@@ -66,17 +68,19 @@ class App extends Component {
             <button onClick={() => this.eatOpponent(this.state.opponent)}>EAT</button>  */}
           </div>
         </div>
-        <div className='display'> 
+        <div className='battle-log'> 
           <div>
             <h2>Battle Log</h2>
             <h3>.....</h3>
             <h3>.....</h3>
             <h3>.....</h3>
+            <h3>.....</h3>
+
           </div>
         </div>
         
 
-      </React.Fragment>
+      </div>
     );
   }
 }
