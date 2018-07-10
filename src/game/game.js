@@ -1,24 +1,23 @@
 
 
-export const attack = (shooter, target) => {
+export const attack = ( shooter, target) => {
     if (shooter.skill <= target.dodge) {
-        const newTarget = { 
-            ...target, 
-            skill: target.skill + 1 
-        }
-        return newTarget 
+        const newTarget = { ...target, dodge: target.dodge + 1 }
+        const state = {player1: shooter, player2: newTarget}
+        return state
     }
-    const newTarget = { ...target }
-    newTarget.life = target.life - 2
-    return newTarget
+    const newShooter = { ...shooter, skill: shooter.skill + 1 }
+    const newTarget = { ...target, life: target.life - shooter.damage }
+    const state = { player1: newShooter, player2: newTarget }
+    return state
 }
 
 export const eat = (whoAte) => {
-    if (whoAte.damage >= 20) return whoAte
-    const newWhoAte = { ...whoAte,
-        life: whoAte.life - whoAte.damage,
-        damage: whoAte.damage + 10
+    if (whoAte.life >= 25) {
+        const newWhoAte = { ...whoAte, life: 30 }
+        return newWhoAte
     }
+    const newWhoAte = { ...whoAte, life: whoAte.life + 5 }
     return newWhoAte
 }
 
