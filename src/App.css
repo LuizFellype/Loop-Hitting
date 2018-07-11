@@ -3,12 +3,13 @@
 }
 .all {
   display: grid;
-  height: 670px;
-  width: 710px;
+  height: 750px;
+  width: 900px;
   border: solid 1px;
   border-radius: 5%;
   overflow: hidden;
-  
+  font-size: 18px;
+
   align-items: center;
 }
 .middle{

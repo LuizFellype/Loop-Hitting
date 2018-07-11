@@ -37,6 +37,7 @@ test('when eat, increase 5 in who ate lifes', () => {
 test('eat but cannot pass the 30 in life', () => {
     const maxLife1 = { ...state.player1, life: 25 }
     const maxLife2 = { ...state.player1, life: 29 }
+    // TODO: what if already maf life?
     expect(eat(maxLife1)).toEqual({
         life: 30,
         damage: 2,
@@ -53,7 +54,7 @@ test('eat but cannot pass the 30 in life', () => {
 
 test('when ATTACK HIT the opponent (skill > dodge), so increase 1 in attacker skills and attacker damage in player2 lifes', () => {
     const player1Test = ({...state.player1, skill: 6})
-    const player2tTest = ({...state.player2})
+    const player2tTest = ({...state.player2, dodge: 5})
     const changedState = attack( player1Test, player2tTest)
     expect(changedState).toEqual(
         {
