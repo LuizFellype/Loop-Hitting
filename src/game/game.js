@@ -3,12 +3,12 @@
 export const attack = ( shooter, target) => {
     if (shooter.skill <= target.dodge) {
         const newTarget = { ...target, dodge: target.dodge + 1 }
-        const players = {player1: shooter, player2: newTarget}
+        const players = { attacker: shooter, hitted: newTarget }
         return players
     }
     const newShooter = { ...shooter, skill: shooter.skill + 1 }
     const newTarget = { ...target, life: target.life - shooter.damage }
-    const players = { player1: newShooter, player2: newTarget }
+    const players = { attacker: newShooter, hitted: newTarget }
     return players
 }
 

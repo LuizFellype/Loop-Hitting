@@ -58,13 +58,13 @@ test('when ATTACK HIT the opponent (skill > dodge), so increase 1 in attacker sk
     const changedState = attack( player1Test, player2tTest)
     expect(changedState).toEqual(
         {
-            player1: {
+            attacker: {
                 life: 10,
                 damage: 2,
                 skill: 7,
                 dodge: 5,
             },
-            player2: {
+            hitted: {
                 life: player2tTest.life - player1Test.damage,
                 damage: 2,
                 skill: 5,
@@ -77,13 +77,13 @@ test('when opponent DODGES THE ATTACK (dodge >= skill) , increase 1 in dodges', 
         const changedplayer2 = attack(state.player1, state.player2)
         expect(changedplayer2).toEqual(
         {
-            player1: {
+            attacker: {
                 life: 10,
                 damage: 2,
                 skill: 5,
                 dodge: 5,
             },
-            player2: {
+            hitted: {
                 life: 10,
                 damage: 2,
                 skill: 5,
