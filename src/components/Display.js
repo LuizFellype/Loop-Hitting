@@ -1,4 +1,4 @@
 import React from 'react'
 
 export default props =>
-    <div>{props.value}</div>
+    <div><h3>{props.label}</h3>{props.value}</div>
