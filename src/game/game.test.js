@@ -1,4 +1,4 @@
-import { attack, eat } from './game'
+import { attack, eat, ran } from './game'
 const state = {
     player1: {
         life: 10,
@@ -10,11 +10,9 @@ const state = {
         life: 10,
         damage: 2,
         skill: 5,
-        dodge: 5,
+        dodge: 4,
     }
 }
-
-// Math.floor(Math.random() * max + 1)  -> positive random number between 1 and max 
 
 // COMPLETED // attack hit = attacker.skill ++ and opponent.life --
 // COMPLETED // attack miss = opponent.dodge ++
@@ -22,24 +20,47 @@ const state = {
 // damage = random [0 ~ 1] * damage
 // eat = life ++ 
 
-// test('when the hitted is dead (life = 0), should reset the game', () => {
-//     const player1Test = ({...state.player1, skill: 6})
-//     const player2tTest = ({...state.player1, life: 2}) // with the attack of 2 damage, he is gonna die.
-//     expect(attack(player1Test, player2tTest)).toEqual({
-//         attacker: {
-//             life: 10,
-//             damage: 2,
-//             skill: 6,
-//             dodge: 5,
-//         },
-//         hitted: {
-//             life: 2,
-//             damage: 2,
-//             skill: 5,
-//             dodge: 5,
-//         }
-//     })
-// } )
+test('when the shooter hit the opponent, should increse 1 point in skill shooter and \
+decrase damage shooter points in the target of life', () => {
+    const r1 = 2 // assuming ran(5) == 2
+    const r2 = 1
+    const game = attack(state.player1, r1, state.player2, r2)        
+        expect(game).toEqual({
+            attacker: {
+                life: 10,
+                damage: 2,
+                skill: 6,
+                dodge: 5,
+            },
+            hitted: {
+                life: 8,
+                damage: 2,
+                skill: 5,
+                dodge: 4,
+            }
+        }) 
+})
+
+test('when the target dodges from the attack, \
+should increase 1 point in dodge of the target', () => {
+    const r1 = 1 // assuming ran(5) == 2
+    const r2 = 2 // assuming ran(5) == 1
+    const game = attack(state.player1, r1, state.player2, r2)        
+        expect(game).toEqual({
+            attacker: {
+                life: 10,
+                damage: 2,
+                skill: 5,
+                dodge: 5,
+            },
+            hitted: {
+                life: 10,
+                damage: 2,
+                skill: 5,
+                dodge: 5,
+            }
+        }) 
+})
 
 
 test('when eat, increase 5 in who ate lifes', () => {
@@ -69,51 +90,4 @@ test('eat but cannot pass the 30 in life', () => {
         skill: 5,
         dodge: 5,
     })
-} )
-
-test('when ATTACK HIT the opponent (skill > dodge), so increase 1 in attacker skills and attacker damage in player2 lifes', () => {
-    const player1Test = ({...state.player1, skill: 6})
-    const player2tTest = ({...state.player2, dodge: 5})
-    const changedState = attack( player1Test, player2tTest)
-    expect(changedState).toEqual(
-        {
-            attacker: {
-                life: 10,
-                damage: 2,
-                skill: 7,
-                dodge: 5,
-            },
-            hitted: {
-                life: player2tTest.life - player1Test.damage,
-                damage: 2,
-                skill: 5,
-                dodge: 5,
-            }
-        })
-        expect(changedState).not.toBe(state)
 })
-test('when opponent DODGES THE ATTACK (dodge >= skill) , increase 1 in dodges', () => {
-        const changedplayer2 = attack(state.player1, state.player2)
-        expect(changedplayer2).toEqual(
-        {
-            attacker: {
-                life: 10,
-                damage: 2,
-                skill: 5,
-                dodge: 5,
-            },
-            hitted: {
-                life: 10,
-                damage: 2,
-                skill: 5,
-                dodge: 6,
-            }
-        })
-        expect(changedplayer2).not.toBe(state)
-})
-
-// // tests about how to do tests
-// // test('sum 2 + 4 = 6', ()=> {
-//     // expect(f(2, 4)).toEqual(6)
-// // })
-
