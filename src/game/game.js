@@ -21,13 +21,12 @@ export const attack = ( shooter, random1, target, random2 ) => {
 // ---------------------------------------------------------------
 
 
-
-
-
-
-
-
-
+export const random = (max1, max2) => {
+    const random1 = ran(max1)
+    const random2 = ran(max2)
+    const randomNumbers = {random1, random2}
+    return randomNumbers
+}
 
 
 export const eat = (whoAte) => {

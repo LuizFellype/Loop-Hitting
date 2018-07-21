@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import './App.css'
 import Display from './components/Display';
-import { attack, eat } from './game/game'
+import { attack, eat, random } from './game/game'
 const initialState = {
   turn: 'PLAYER 1',
   player1: {
     life: 10,
     damage: 2,
-    skill: 6,
-    dodge: 5,
+    skill: 5,
+    dodge: 6,
   },
   player2: {
     life: 10,
     damage: 2,
-    skill: 6,
-    dodge: 5,
+    skill: 5,
+    dodge: 6,
   },
   msg1: '',
   msg2: '',
@@ -30,21 +30,22 @@ class App extends Component {
     const msg = "I'm eating, you wont kill me, baby!"
     if (event.target.value === 'player1') {
       const p1DontDie = eat(this.state.player1)
-      this.setState({player1: p1DontDie, notYourTurn1: true, notYourTurn2: false ,msg1: msg, turn: 'PLAYER 2'})
+      this.setState({player1: p1DontDie, notYourTurn1: true, notYourTurn2: false ,msg1: msg, msg2:'', turn: 'PLAYER 2'})
       return
     }
     const p2DontDie = eat(this.state.player2)
-    this.setState({player2: p2DontDie, msg2: msg, notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' })
+    this.setState({player2: p2DontDie, msg2: msg, msg1: '', notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' })
   }
   attacker = (event) => {
+    const { random1, random2 } = random(4, 5)
     const msg = 'Do you wanna take this outside, man?!'
     if (event.target.value === 'player1') {
-      const { attacker, hitted } = attack(this.state.player1, this.state.player2)
-      this.setState({ player1: attacker, player2: hitted, msg1: msg, notYourTurn1: true, notYourTurn2: false, turn: 'PLAYER 2' })
+      const { attacker, hitted } = attack(this.state.player1, random1 ,this.state.player2, random2)
+      this.setState({ player1: attacker, player2: hitted, msg1: msg, msg2:'', notYourTurn1: true, notYourTurn2: false, turn: 'PLAYER 2' })
       return
     }
-    const { attacker, hitted } = attack(this.state.player2, this.state.player1)
-    this.setState({ player1: hitted, player2: attacker, msg2: msg, notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' }) 
+    const { attacker, hitted } = attack(this.state.player2, random2 ,this.state.player1, random1)
+    this.setState({ player1: hitted, player2: attacker, msg2: msg, msg1:'', notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' }) 
   }
 
   

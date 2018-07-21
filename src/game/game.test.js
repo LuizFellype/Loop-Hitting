@@ -1,4 +1,4 @@
-import { attack, eat, ran } from './game'
+import { attack, eat, random } from './game'
 const state = {
     player1: {
         life: 10,
