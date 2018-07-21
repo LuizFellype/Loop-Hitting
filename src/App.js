@@ -3,22 +3,23 @@ import './App.css'
 import Display from './components/Display';
 import { attack, eat } from './game/game'
 const initialState = {
+  turn: 'PLAYER 1',
   player1: {
     life: 10,
     damage: 2,
     skill: 6,
     dodge: 5,
-    msg: '',
   },
   player2: {
     life: 10,
     damage: 2,
     skill: 6,
     dodge: 5,
-    msg2: '',
   },
-  notYourTurn: false,
-  
+  msg1: '',
+  msg2: '',
+  notYourTurn1: false,
+  notYourTurn2: true,
 }
 
 class App extends Component {
@@ -29,21 +30,21 @@ class App extends Component {
     const msg = "I'm eating, you wont kill me, baby!"
     if (event.target.value === 'player1') {
       const p1DontDie = eat(this.state.player1)
-      this.setState({player1: p1DontDie, msg1: msg})
-      console.log(this.state.player1.msg1)
+      this.setState({player1: p1DontDie, notYourTurn1: true, notYourTurn2: false ,msg1: msg, turn: 'PLAYER 2'})
       return
     }
     const p2DontDie = eat(this.state.player2)
-    this.setState({player2: p2DontDie, msg2: msg})
+    this.setState({player2: p2DontDie, msg2: msg, notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' })
   }
   attacker = (event) => {
+    const msg = 'Do you wanna take this outside, man?!'
     if (event.target.value === 'player1') {
       const { attacker, hitted } = attack(this.state.player1, this.state.player2)
-      this.setState({ player1: attacker, player2: hitted })
+      this.setState({ player1: attacker, player2: hitted, msg1: msg, notYourTurn1: true, notYourTurn2: false, turn: 'PLAYER 2' })
       return
     }
     const { attacker, hitted } = attack(this.state.player2, this.state.player1)
-    this.setState({ player1: hitted, player2: attacker }) 
+    this.setState({ player1: hitted, player2: attacker, msg2: msg, notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' }) 
   }
 
   
@@ -54,7 +55,7 @@ class App extends Component {
           <p> LOOP HITTING</p>
         </div>
         <div className='turn'> 
-          <h2> Turn: PLAYER 1</h2>
+          <h2> Turn: {this.state.turn}</h2>
         </div>
         <div className='tree-col'>
           <div>
@@ -63,8 +64,8 @@ class App extends Component {
             <Display label="DAMAGE" value={this.state.player1.damage}/>
             <Display label="SKILL" value={this.state.player1.skill}/>
             <Display label="DODGE" value={this.state.player1.dodge}/>
-            <button value='player1' onClick={this.getLife}>EAT</button> 
-            <button value='player1' onClick={this.attacker}>ATTACK</button>
+            <button disabled={this.state.notYourTurn1} value='player1' onClick={this.getLife}>EAT</button> 
+            <button disabled={this.state.notYourTurn1} value='player1' onClick={this.attacker}>ATTACK</button>
           </div>
           <div className='middle'>
             <h1>VS</h1>
@@ -75,8 +76,8 @@ class App extends Component {
             <Display label="DAMAGE" value={this.state.player2.damage}/>
             <Display label="SKILL" value={this.state.player2.skill}/>
             <Display label="DODGE" value={this.state.player2.dodge}/>
-            <button  disabled={this.notYourTurn} value='player2' onClick={this.getLife}>EAT</button> 
-            <button disabled={this.notYourTurn} value='player2' onClick={this.attacker}>ATTACK</button>
+            <button disabled={this.state.notYourTurn2} value='player2' onClick={this.getLife}>EAT</button> 
+            <button disabled={this.state.notYourTurn2} value='player2' onClick={this.attacker}>ATTACK</button>
           </div>
         </div>
         <div className='battle-log'> 
