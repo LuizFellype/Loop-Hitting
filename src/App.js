@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css'
-import Display from './components/Display';
 import { attack, eat, random } from './game/game'
+import BattleLog from './components/BattleLog'
+import Player from './components/Player'
+
 const initialState = {
   turn: 'PLAYER 1',
   player1: {
@@ -37,9 +39,8 @@ class App extends Component {
     this.setState({player2: p2DontDie, msg2: msg, msg1: '', notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' })
   }
   attacker = (event) => {
-    const { randomA, randomDam ,randomH } = random(6, 0.8 ,5)
+    const { randomA, randomDam ,randomH } = random(6, 0.7, 4.5)
     const msg = 'Do you wanna take this outside, man?!'
-    console.log(randomDam)
     if (event.target.value === 'player1') {
       const { attacker, hitted } = attack(this.state.player1, randomA, randomDam ,this.state.player2, randomH)
       this.setState({ player1: attacker, player2: hitted, msg1: msg, msg2:'', notYourTurn1: true, notYourTurn2: false, turn: 'PLAYER 2' })
@@ -60,35 +61,25 @@ class App extends Component {
           <h2> Turn: {this.state.turn}</h2>
         </div>
         <div className='tree-col'>
-          <div>
-            <h2> Player 1</h2>
-            <Display label="LIFE" value={this.state.player1.life}/>
-            <Display label="DAMAGE" value={this.state.player1.damage}/>
-            <Display label="SKILL" value={this.state.player1.skill}/>
-            <Display label="DODGE" value={this.state.player1.dodge}/>
-            <button disabled={this.state.notYourTurn1} value='player1' onClick={this.getLife}>EAT</button> 
-            <button disabled={this.state.notYourTurn1} value='player1' onClick={this.attacker}>ATTACK</button>
-          </div>
-          <div className='middle'>
-            <h1>VS</h1>
-          </div>        
-          <div >
-            <h2> Player 2</h2>
-            <Display label="LIFE" value={this.state.player2.life}/>
-            <Display label="DAMAGE" value={this.state.player2.damage}/>
-            <Display label="SKILL" value={this.state.player2.skill}/>
-            <Display label="DODGE" value={this.state.player2.dodge}/>
-            <button disabled={this.state.notYourTurn2} value='player2' onClick={this.getLife}>EAT</button> 
-            <button disabled={this.state.notYourTurn2} value='player2' onClick={this.attacker}>ATTACK</button>
-          </div>
+        <div>
+          <h2> Player 1</h2>
+          <Player player={this.state.player1}/>
+          <button disabled={this.state.notYourTurn1} value='player1' onClick={this.getLife}>EAT</button> 
+          <button disabled={this.state.notYourTurn1} value='player1' onClick={this.attacker}>ATTACK</button>
+        </div>
+        <div className='middle'>
+          <h1>VS</h1>
+        </div>        
+        <div >
+          <h2> Player 2</h2>
+          <Player player={this.state.player2}/>
+          <button disabled={this.state.notYourTurn2} value='player2' onClick={this.getLife}>EAT</button> 
+          <button disabled={this.state.notYourTurn2} value='player2' onClick={this.attacker}>ATTACK</button>
+        </div>
         </div>
         <div className='battle-log'> 
-          <h2>Battle Log</h2>
-          <Display label="Player 1" value={this.state.msg1}/>
-          <Display label="Player 2" value={this.state.msg2}/>
+          <BattleLog status={this.state}/>
         </div>
-        
-
       </div>
     );
   }
