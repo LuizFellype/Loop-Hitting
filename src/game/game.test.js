@@ -21,10 +21,11 @@ const state = {
 // eat = life ++ 
 
 test('when the shooter hit the opponent, should increse 1 point in skill shooter and \
-decrase damage shooter points in the target of life', () => {
+decrease random damage of the shooter in the targets life', () => {
     const r1 = 2 // assuming ran(5) == 2
     const r2 = 1
-    const game = attack(state.player1, r1, state.player2, r2)        
+    const rd = 1.25
+    const game = attack(state.player1, r1, rd, state.player2, r2)        
         expect(game).toEqual({
             attacker: {
                 life: 10,
@@ -33,7 +34,7 @@ decrase damage shooter points in the target of life', () => {
                 dodge: 5,
             },
             hitted: {
-                life: 8,
+                life: 7.5,
                 damage: 2,
                 skill: 5,
                 dodge: 4,
@@ -45,7 +46,7 @@ test('when the target dodges from the attack, \
 should increase 1 point in dodge of the target', () => {
     const r1 = 1 // assuming ran(5) == 2
     const r2 = 2 // assuming ran(5) == 1
-    const game = attack(state.player1, r1, state.player2, r2)        
+    const game = attack(state.player1, r1, 9, state.player2, r2)        
         expect(game).toEqual({
             attacker: {
                 life: 10,

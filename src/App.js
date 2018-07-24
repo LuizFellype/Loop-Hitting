@@ -5,13 +5,13 @@ import { attack, eat, random } from './game/game'
 const initialState = {
   turn: 'PLAYER 1',
   player1: {
-    life: 10,
+    life: 12,
     damage: 2,
     skill: 5,
     dodge: 6,
   },
   player2: {
-    life: 10,
+    life: 12,
     damage: 2,
     skill: 5,
     dodge: 6,
@@ -37,14 +37,15 @@ class App extends Component {
     this.setState({player2: p2DontDie, msg2: msg, msg1: '', notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' })
   }
   attacker = (event) => {
-    const { random1, random2 } = random(4, 5)
+    const { randomA, randomDam ,randomH } = random(6, 0.8 ,5)
     const msg = 'Do you wanna take this outside, man?!'
+    console.log(randomDam)
     if (event.target.value === 'player1') {
-      const { attacker, hitted } = attack(this.state.player1, random1 ,this.state.player2, random2)
+      const { attacker, hitted } = attack(this.state.player1, randomA, randomDam ,this.state.player2, randomH)
       this.setState({ player1: attacker, player2: hitted, msg1: msg, msg2:'', notYourTurn1: true, notYourTurn2: false, turn: 'PLAYER 2' })
       return
     }
-    const { attacker, hitted } = attack(this.state.player2, random2 ,this.state.player1, random1)
+    const { attacker, hitted } = attack(this.state.player2, randomA, randomDam ,this.state.player1, randomH)
     this.setState({ player1: hitted, player2: attacker, msg2: msg, msg1:'', notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' }) 
   }
 
