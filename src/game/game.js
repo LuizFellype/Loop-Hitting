@@ -2,10 +2,10 @@
 const ran = (max, min) => Math.random() * max + min
 
 export const random = (maxA, maxDamage ,maxH) => {
-    const randomA = Math.floor(ran(maxA, 0))
+    const random1 = Math.floor(ran(maxA, 0))
     const randomDam = parseFloat(ran(maxDamage, 0.8).toFixed(2))
-    const randomH = Math.floor(ran(maxH, 0))
-    const randomNumbers = {randomA, randomDam, randomH}
+    const random2 = Math.floor(ran(maxH, 0))
+    const randomNumbers = {random1, randomDam, random2}
     return randomNumbers
 }
 

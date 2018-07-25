@@ -39,14 +39,22 @@ class App extends Component {
     this.setState({player2: p2DontDie, msg2: msg, msg1: '', notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' })
   }
   attacker = (event) => {
-    const { randomA, randomDam ,randomH } = random(6, 0.7, 4.5)
+    const { random1, randomDam ,random2 } = random(6.7, 0.7, 10)
     const msg = 'Do you wanna take this outside, man?!'
     if (event.target.value === 'player1') {
-      const { attacker, hitted } = attack(this.state.player1, randomA, randomDam ,this.state.player2, randomH)
+      const { attacker, hitted } = attack(this.state.player1, random1, randomDam ,this.state.player2, random2)
+      if (hitted.life <= 0) { 
+        this.setState({ ...initialState, msg1: 'Game Over Baby. Now, let the next loser come in!' })
+        return 
+      }
       this.setState({ player1: attacker, player2: hitted, msg1: msg, msg2:'', notYourTurn1: true, notYourTurn2: false, turn: 'PLAYER 2' })
       return
     }
-    const { attacker, hitted } = attack(this.state.player2, randomA, randomDam ,this.state.player1, randomH)
+    const { attacker, hitted } = attack(this.state.player2, random2, randomDam ,this.state.player1, random1)
+    if (hitted.life <= 0) {
+      this.setState({ ...initialState, msg2: 'Game Over Baby. Now, let the next loser come in!' })
+      return
+    }
     this.setState({ player1: hitted, player2: attacker, msg2: msg, msg1:'', notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' }) 
   }
 
