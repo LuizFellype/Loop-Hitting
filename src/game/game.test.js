@@ -1,4 +1,4 @@
-import { attack, eat, random } from './game'
+import { attack, eat, listMaker } from './game'
 const state = {
     player1: {
         life: 10,
@@ -92,3 +92,12 @@ test('eat but cannot pass the 30 in life', () => {
         dodge: 5,
     })
 })
+
+
+test('should add the string to the history(list)',() => {
+    const historyLog = ['I am eating']
+    const msg = 'You are gonna die baby'+ '. sleep with one eye open.'
+    expect(listMaker(msg, historyLog)).toEqual(
+        ['I am eating' , 'You are gonna die baby. sleep with one eye open.']
+    )
+}) 

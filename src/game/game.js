@@ -25,10 +25,6 @@ export const attack = ( shooter, randomA, randomDamage, target, randomH ) => {
    return players
 }
 
-// (Math.random() * (1.5 - 0.8) + 0.8).toFixed(2)
-// ---------------------------------------------------------------
-
-
 export const eat = (whoAte) => {
     if (whoAte.life >= 25) {
         const newWhoAte = { ...whoAte, life: 30 }
@@ -37,3 +33,9 @@ export const eat = (whoAte) => {
     const newWhoAte = { ...whoAte, life: whoAte.life + 5.00 }
     return newWhoAte
 } 
+
+export const listMaker = (stringToAdd, listToBeChanged) => { 
+    const history = [...listToBeChanged]
+    history.push(stringToAdd)
+    return history
+}
