@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css'
-import { attack, eat, random } from './game/game'
+import { attack, eat, random, listMaker } from './game/game'
 import BattleLog from './components/BattleLog'
 import Player from './components/Player'
 
@@ -18,8 +18,7 @@ const initialState = {
     skill: 5,
     dodge: 6,
   },
-  msg1: '',
-  msg2: '',
+  historyLog: [],
   notYourTurn1: false,
   notYourTurn2: true,
 }
@@ -29,33 +28,43 @@ class App extends Component {
   state = {...initialState}
 
   getLife = (event) => {
-    const msg = "I'm eating, you wont kill me, baby!"
+    const msg = "I'm eating, baby! it turns my life up in 5 points"
     if (event.target.value === 'player1') {
       const p1DontDie = eat(this.state.player1)
-      this.setState({player1: p1DontDie, notYourTurn1: true, notYourTurn2: false ,msg1: msg, msg2:'', turn: 'PLAYER 2'})
+      const newHistory = listMaker('Player 1: '+ msg, this.state.historyLog)
+      // const newHistory = [...this.state.historyLog]
+      // newHistory.push('Player 1: '+ msg) 
+      this.setState({player1: p1DontDie, notYourTurn1: true, notYourTurn2: false , historyLog: newHistory, turn: 'PLAYER 2'})
       return
     }
     const p2DontDie = eat(this.state.player2)
-    this.setState({player2: p2DontDie, msg2: msg, msg1: '', notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' })
+    const newHistory = listMaker('Player 2: '+ msg, this.state.historyLog)
+    this.setState({player2: p2DontDie, historyLog: newHistory, notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' })
   }
+  
   attacker = (event) => {
     const { random1, randomDam ,random2 } = random(6.7, 0.7, 10)
     const msg = 'Do you wanna take this outside, man?!'
     if (event.target.value === 'player1') {
       const { attacker, hitted } = attack(this.state.player1, random1, randomDam ,this.state.player2, random2)
       if (hitted.life <= 0) { 
-        this.setState({ ...initialState, msg1: 'Game Over Baby. Now, let the next loser come in!' })
+        const newHistory = listMaker('Player 1: GAME OVER baby, let the next Loser come in', this.state.historyLog)
+        this.setState({ ...initialState, historyLog: newHistory, notYourTurn1: true })
         return 
       }
-      this.setState({ player1: attacker, player2: hitted, msg1: msg, msg2:'', notYourTurn1: true, notYourTurn2: false, turn: 'PLAYER 2' })
+      const newHistory = listMaker('Player 1: '+ msg, this.state.historyLog)
+      this.setState({ player1: attacker, player2: hitted, historyLog: newHistory, notYourTurn1: true, notYourTurn2: false, turn: 'PLAYER 2' })
       return
     }
+
     const { attacker, hitted } = attack(this.state.player2, random2, randomDam ,this.state.player1, random1)
     if (hitted.life <= 0) {
-      this.setState({ ...initialState, msg2: 'Game Over Baby. Now, let the next loser come in!' })
+      const newHistory = listMaker('Player 2: GAME OVER baby, let the next Loser come in', this.state.historyLog)
+      this.setState({ ...initialState, historyLog: newHistory, notYourTurn1: true})
       return
     }
-    this.setState({ player1: hitted, player2: attacker, msg2: msg, msg1:'', notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' }) 
+    const newHistory = listMaker('Player 2: '+ msg, this.state.historyLog)
+    this.setState({ player1: hitted, player2: attacker, historyLog: newHistory, notYourTurn2: true, notYourTurn1: false, turn: 'PLAYER 1' }) 
   }
 
   
