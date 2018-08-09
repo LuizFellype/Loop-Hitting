@@ -95,7 +95,7 @@ class App extends Component {
         </div>
         </div>
         <div className='battle-log'> 
-          <BattleLog status={this.state.historyLog}/>
+          <BattleLog history={this.state.historyLog}/>
         </div>
       </div>
     );
