@@ -8,12 +8,12 @@
   border: solid 1px;
   border-radius: 5%;
   overflow: hidden;
-  font-size: 18px;
 
   align-items: center;
 }
 .middle{
   padding-top: 30%; 
+  font-size: 18px;
 }
 
 .title {
@@ -31,6 +31,7 @@
   display: grid;
   text-align: center;
   grid-template-columns: repeat(3, 33%);
+  font-size: 18px;
 }
 
 .battle-log {
@@ -40,4 +41,5 @@
 .turn {
   text-align: center;
   margin-top: -70px;
+  font-size: 18px;
 }

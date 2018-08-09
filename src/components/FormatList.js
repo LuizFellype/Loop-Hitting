@@ -1,7 +1,8 @@
 import React from 'react'
+import './FormatList'
 
 const toList = (props) =>
-    <div>
+    <div className='item'>
         {props.logHistory.map(el => <div> {el} </div>)}
     </div>
 
