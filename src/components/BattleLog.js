@@ -8,11 +8,13 @@ const daysOfWeek = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta',
 
 export default class BattleLog extends PureComponent {
     state = {
-        arrOfTheToday: daysOfWeek[intDay].split('')
+        arrOfTheToday: daysOfWeek[intDay].split(''),
+        history: [],
     }
 
     part = () => {
-        const fourLast = lastElements(this.props.status, 4)
+        const fullHistory = this.props.status
+        const fourLast = lastElements(fullHistory, 4)
         return fourLast
     }
 
