@@ -94,7 +94,7 @@ class App extends Component {
           <button disabled={this.state.notYourTurn2} value='player2' onClick={this.attacker}>ATTACK</button>
         </div>
         </div>
-        <div className='battle-log'> 
+        <div> 
           <BattleLog history={this.state.historyLog}/>
         </div>
       </div>

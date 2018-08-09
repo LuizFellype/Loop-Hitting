@@ -1,0 +1,19 @@
+.cont {
+    text-align: center;
+    margin-top: -100px;
+  }
+
+table {
+    padding-left: 29%; 
+}
+
+.battlelog {
+    border-left: solid 1px;
+    border-right: solid 1px;
+}
+
+td, th {
+    border-bottom: solid 0.12em;
+    padding: 9px;
+}
+

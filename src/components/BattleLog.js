@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import './BattleLog.css'
 import FormatList from './FormatList'
 import { threeFirst, time, lastElements } from '../game/game'
 
@@ -20,20 +21,25 @@ export default class BattleLog extends PureComponent {
 
     fullHistory = () => {
         this.setState({ fullHistory: !this.state.fullHistory })
-        console.log(this.state.fullHistory)
     }
 
     render(){
     return (
-    <div>
-        <div>
-            <h4>{threeFirst(this.state.arrOfTheToday)} {time()}</h4>  
-            <h2>Battle Log</h2> 
-            <button onClick={this.fullHistory}>
-                {this.state.fullHistory ? 'Normal History' : 'Full History'}
-            </button>
-        </div>
-        <FormatList logHistory={this.state.fullHistory? this.props.history: this.part()} />
+    <div className='cont'>
+        <table>
+        <tbody>
+            <tr>
+                <th><h4>{threeFirst(this.state.arrOfTheToday)} {time()}</h4></th>
+                <th className='battlelog'><h2>Battle Log</h2></th>
+                <th>
+                    <button onClick={this.fullHistory}>
+                        {this.state.fullHistory ? 'Normal History' : 'Full History'}
+                    </button>
+                </th>
+            </tr>
+        </tbody>
+        </table>
+            <FormatList logHistory={this.state.fullHistory ? this.props.history: this.part()}/>
     </div>
     )
 }
