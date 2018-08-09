@@ -1,4 +1,7 @@
-.item {
-    margin-bottom: 2px;
+.lis {
     font-size: 12px;
+}
+
+.item {
+    margin-top: 4px;
 }

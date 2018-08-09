@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
-import './FormatList'
+import './FormatList.css'
 
 export default class FormatList extends PureComponent {
     render() {
     return(
-        <div className='item'>
-            {this.props.logHistory.map(el => <div> {el} </div>)}
+        <div className='lis'>
+            {this.props.logHistory.map((el, i) => <div className='item' key={i}> {el} </div>)}
         </div>
     )}
 }
