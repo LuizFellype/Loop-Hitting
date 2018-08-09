@@ -1,5 +1,5 @@
-import { attack, eat, listMaker } from './game'
-const state = {
+import { attack, eat, listMaker, threeFirst } from './game'
+const state = { 
     player1: {
         life: 10,
         damage: 2,
@@ -101,3 +101,9 @@ test('should add the string to the history(list)',() => {
         ['I am eating' , 'You are gonna die baby. sleep with one eye open.']
     )
 }) 
+
+
+test('shoul return the first 3 items of a array and join in a upper Case capitalized', ()=>{
+    const abcdario = ['a', 'b', 'c', 'd', 'f']
+    expect(threeFirst(abcdario)).toEqual('ABC')
+})
