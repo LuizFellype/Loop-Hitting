@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import FormatList from './FormatList'
-import { threeFirst, time } from '../game/game'
+import { threeFirst, time, lastElements } from '../game/game'
 
 const date = new Date()
 const intDay = date.getDay()
@@ -11,6 +11,11 @@ export default class BattleLog extends PureComponent {
         arrOfTheToday: daysOfWeek[intDay].split('')
     }
 
+    part = () => {
+        const fourLast = lastElements(this.props.status, 4)
+        return fourLast
+    }
+
     render(){
     return (
     <div>
@@ -18,7 +23,7 @@ export default class BattleLog extends PureComponent {
             <h4>{threeFirst(this.state.arrOfTheToday)} {time()}</h4>  
             <h2>Battle Log</h2>
         </div>
-        <FormatList logHistory={this.props.status.historyLog} />
+        <FormatList logHistory={this.part()} />
     </div>
     )
 }
