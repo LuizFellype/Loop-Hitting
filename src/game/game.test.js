@@ -1,4 +1,4 @@
-import { attack, eat, listMaker, threeFirst, fiveLastElements } from './game'
+import { attack, eat, listMaker, threeFirst, lastElements } from './game'
 const state = { 
     player1: {
         life: 10,
@@ -108,9 +108,18 @@ test('shoul return the first 3 items of a array and join in a upper Case capital
     expect(threeFirst(abcdario)).toEqual('ABC')
 })
 
-test('should pick the last 4 elemnts of the array dont matter the length of the array', () => {
-    const days = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    expect(fiveLastElements(days)).toEqual([6, 7, 8, 9])
-    const dayz = []
-    expect(fiveLastElements(dayz)).toEqual([])
+
+test('should pick the last "x"(the second parameter) elemnts of the array\
+ dont matter the length of the array', () => {
+    const n1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    expect(lastElements(n1, 6)).toEqual([4, 5, 6, 7, 8, 9]) 
 })
+test('the same of the last one', () => {
+    const n2 = []
+    expect(lastElements(n2, 2)).toEqual([])
+})
+test('the same of the last one', () => {
+    const n3 = [0, 1, 2, 3, 4, 5,]
+    expect(lastElements(n3, 2)).toEqual([4, 5])
+})
+
