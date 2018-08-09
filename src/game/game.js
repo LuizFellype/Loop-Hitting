@@ -52,4 +52,9 @@ export const threeFirst = (arr) => {
     return format
 }
 
+export const fiveLastElements = (arr) => {
+    const fiveLast = arr.slice(-4)
+    return fiveLast
+}
+
 export const time = () => `${date.getHours()}:${date.getMinutes()}`
