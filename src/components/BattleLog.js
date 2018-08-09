@@ -1,5 +1,4 @@
 import React from 'react'
-import Display from './Display'
 import FormatList from './FormatList'
 
 export default ({ status }) =>
