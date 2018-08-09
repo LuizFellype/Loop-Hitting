@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import './FormatList'
 
-const toList = (props) =>
-    <div className='item'>
-        {props.logHistory.map(el => <div> {el} </div>)}
-    </div>
-
-export default toList
+export default class FormatList extends PureComponent {
+    render() {
+    return(
+        <div className='item'>
+            {this.props.logHistory.map(el => <div> {el} </div>)}
+        </div>
+    )}
+}
